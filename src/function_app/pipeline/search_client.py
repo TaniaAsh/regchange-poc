@@ -39,10 +39,15 @@ class AISearchClient:
                 VectorizedQuery(vector=query_vector, k_nearest_neighbors=top_k, fields="content_vector")
             ]
 
+        # Deliberately always "simple" (classic Lucene query), never
+        # "semantic": the semantic ranker requires Basic tier or above and
+        # this PoC is scoped to run on the Search Free tier (see
+        # infra/modules/search.bicep). Hybrid (keyword + vector) still works
+        # fine on Free tier — only the semantic re-ranking step is excluded.
         results = self._client.search(
             search_text=query_text,
             vector_queries=vector_queries,
-            query_type="semantic" if vector_queries is None else "simple",
+            query_type="simple",
             top=top_k,
         )
 
