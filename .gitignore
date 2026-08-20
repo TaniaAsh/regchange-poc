@@ -1,0 +1,46 @@
+# Secrets / local config — never commit
+.env
+.env.*
+*.env
+local.settings.json
+*.key
+*.pem
+.azure/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Azure Functions
+bin/
+obj/
+.python_packages/
+azure-functions-core-tools/
+
+# Azurite local emulator storage
+__azurite_db*__.json
+__blobstorage__/
+__queuestorage__/
+
+# Bicep / ARM build output
+*.json.bak
+infra/**/*.compiled.json
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local outputs / logs
+out/
+*.log
