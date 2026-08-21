@@ -9,6 +9,9 @@ param githubRepo string = 'TaniaAsh/regchange-poc'
 @description('Branch this identity is trusted for — matches deploy-function.yml\'s push trigger')
 param githubBranch string = 'main'
 
+@description('The exact subject claim GitHub issues for this repo. This tenant has GitHub\'s "use repository ID" (immutable identifiers) option enabled, so the subject includes numeric account/repo IDs, not just names — found by inspecting the already-existing federated credential with `az identity federated-credential list`, not guessable generically.')
+param githubSubject string = 'repo:TaniaAsh@10188197/regchange-poc@1341169360:ref:refs/heads/main'
+
 // User-Assigned Managed Identity creation is idempotent by name: if
 // `regchange-poc-github-deploy` already exists in this resource group (it
 // does — it was created manually before this module existed), this is a
@@ -20,15 +23,15 @@ resource identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' 
   location: location
 }
 
-// Standard GitHub Actions OIDC subject format for "this workflow was
-// triggered by a push to this branch". Matches deploy-function.yml's
-// `on: push: branches: [main]` trigger.
+// Named and valued to match the already-existing credential exactly (see
+// githubSubject above) — this manages the real one in place rather than
+// creating a second, non-functional credential alongside it.
 resource federatedCredential 'Microsoft.ManagedIdentity/userAssignedIdentities/federatedIdentityCredentials@2023-01-31' = {
   parent: identity
-  name: 'github-actions-${githubBranch}'
+  name: 'github-main'
   properties: {
     issuer: 'https://token.actions.githubusercontent.com'
-    subject: 'repo:${githubRepo}:ref:refs/heads/${githubBranch}'
+    subject: githubSubject
     audiences: [
       'api://AzureADTokenExchange'
     ]
