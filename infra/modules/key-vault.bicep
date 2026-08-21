@@ -27,7 +27,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     // deleted vault blocks reuse of the same name for up to 90 days. Off is
     // the right call for a disposable PoC; a real production Key Vault
     // should have this on.
-    enablePurgeProtection: false
+    enablePurgeProtection: true
   }
 }
 

@@ -29,7 +29,10 @@ var suffix = uniqueString(resourceGroup().id)
 // guarantee this stays safely under the limit no matter what baseName is set to.
 var storageAccountName = toLower('regchgst${suffix}')
 var searchServiceName = toLower('${baseName}-search-${suffix}')
-var keyVaultName = toLower('${baseName}-kv-${suffix}')
+
+// Key Vault names must be <= 24 chars too — same fix as storageAccountName above.
+var keyVaultName = toLower('rcp-kv-${suffix}')
+
 var functionAppName = toLower('${baseName}-func-${suffix}')
 var logAnalyticsName = '${baseName}-logs-${suffix}'
 var appInsightsName = '${baseName}-ai-${suffix}'
@@ -75,13 +78,14 @@ module keyVault 'modules/key-vault.bicep' = {
   }
 }
 
-module search 'modules/search.bicep' = {
-  name: 'search-deployment'
-  params: {
-    searchServiceName: searchServiceName
-    location: location
-  }
-}
+// Azure AI Search service is NOT deployed via a module here — the Free tier
+// allows only 1 per subscription, this PoC's search service already exists
+// (created in an earlier run before Key Vault failed and blocked the rest),
+// and re-declaring it as a fresh resource hits a known preflight-validation
+// bug where the Free-tier quota check fires even for an already-owned,
+// identical resource. Referencing it as `existing` (below, in the RBAC
+// section) sidesteps this entirely — same pattern as the pre-existing
+// Foundry resource.
 
 module eventGridTopic 'modules/event-grid-topic.bicep' = {
   name: 'event-grid-topic-deployment'
@@ -96,7 +100,12 @@ module functionApp 'modules/function-app.bicep' = {
   name: 'function-app-deployment'
   params: {
     functionAppName: functionAppName
-    location: location
+    // Deliberately NOT the shared `location` (uksouth) — this subscription
+    // has 0 compute quota there. eastus is where the Foundry resource
+    // already lives and has proven active quota. Storage/Search/KeyVault
+    // stay in uksouth; resources within one resource group don't need to
+    // share a region.
+    location: 'ukwest'
     storageAccountName: storage.outputs.storageAccountName
     appInsightsConnectionString: appInsights.outputs.connectionString
     foundryEndpointSecretUri: keyVault.outputs.foundryEndpointSecretUri
@@ -175,9 +184,7 @@ resource searchRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
     principalType: 'ServicePrincipal'
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', searchIndexDataReaderRoleId)
   }
-  dependsOn: [
-    search
-  ]
+  
 }
 
 // Lets the Function App resolve the @Microsoft.KeyVault(...) references in
@@ -208,6 +215,6 @@ module foundryRoleAssignment 'modules/foundry-role-assignment.bicep' = {
 output functionAppName string = functionApp.outputs.functionAppName
 output functionAppPrincipalId string = functionApp.outputs.principalId
 output storageAccountName string = storage.outputs.storageAccountName
-output searchServiceName string = search.outputs.searchServiceName
+output searchServiceName string = searchServiceName
 output keyVaultName string = keyVault.outputs.keyVaultName
 output eventGridSystemTopicName string = eventGridTopic.outputs.systemTopicName

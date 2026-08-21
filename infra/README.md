@@ -78,6 +78,11 @@ az deployment group create \
 az group delete --name rg-regchange-poc --yes --no-wait
 ```
 
-Everything in this resource group is disposable by design — Key Vault has
-purge protection off specifically so the group can be deleted and recreated
-freely between sessions with zero idle cost in between.
+Everything in this resource group is disposable by design. One caveat: this
+Azure tenant enforces Key Vault purge protection via policy (common
+enterprise baseline), so a deleted vault stays soft-deleted for the retention
+period and blocks recreating a vault with the same name during that window.
+If you hit this after a teardown, delete and recreate the resource group
+itself under a new name — the vault name is derived from
+`uniqueString(resourceGroup().id)`, so a new resource group name gives every
+resource a fresh name automatically.
