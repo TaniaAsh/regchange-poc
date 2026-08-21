@@ -38,9 +38,35 @@ jobs:
         working-directory: src/function_app
         run: |
           python -m pip install --upgrade pip
+
           pip install \
             --target=".python_packages/lib/site-packages" \
             -r requirements.txt
+
+      - name: Validate Function indexing
+        working-directory: src/function_app
+        run: |
+          python - <<'PY'
+          import sys
+
+          # Dependencies were installed into the directory layout
+          # expected by Azure Functions.
+          sys.path.insert(0, ".python_packages/lib/site-packages")
+
+          import function_app
+
+          functions = function_app.app.get_functions()
+
+          print("Discovered functions:")
+
+          for function in functions:
+              print(f" - {function.get_function_name()}")
+
+          if not functions:
+              raise RuntimeError(
+                  "No Azure Functions were discovered during build."
+              )
+          PY
 
       - name: Create deployment package
         working-directory: src/function_app
@@ -70,6 +96,7 @@ jobs:
             --overwrite true
 
           PACKAGE_URL="https://${STORAGE_ACCOUNT}.blob.core.windows.net/${RELEASE_CONTAINER}/${PACKAGE_NAME}"
+
           echo "PACKAGE_URL=$PACKAGE_URL" >> "$GITHUB_ENV"
 
       - name: Point Function App to deployment package
