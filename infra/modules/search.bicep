@@ -8,18 +8,30 @@ param location string = resourceGroup().location
 // deliberately does NOT request semantic ranking so this stays compatible
 // with the Free tier. Upgrading to Basic later only requires changing this
 // one 'sku.name' value, not touching application code.
+
 resource searchService 'Microsoft.Search/searchServices@2024-06-01-preview' = {
   name: searchServiceName
   location: location
+
   sku: {
     name: 'free'
   }
+
   properties: {
     replicaCount: 1
     partitionCount: 1
     hostingMode: 'default'
     publicNetworkAccess: 'enabled'
+
+    // Keep API keys enabled for the PoC, but also allow Microsoft Entra ID
+    // authentication so the Function App can access Search via Managed Identity.
     disableLocalAuth: false
+
+    authOptions: {
+      aadOrApiKey: {
+        aadAuthFailureMode: 'http401WithBearerChallenge'
+      }
+    }
   }
 }
 
