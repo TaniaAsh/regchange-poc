@@ -1,0 +1,53 @@
+name: Index Internal Policies
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - "data/policies/**"
+      - "scripts/index_policies.py"
+      - "scripts/requirements.txt"
+      - ".github/workflows/index-policies.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  SEARCH_ENDPOINT: https://regchangepoc-search-5q4n3y5rwo4dc.search.windows.net
+  SEARCH_INDEX_NAME: policy-fragments-v1
+  FOUNDRY_ENDPOINT: https://tania-foundry-rag-us-01.cognitiveservices.azure.com/
+  FOUNDRY_API_VERSION: "2024-10-21"
+  FOUNDRY_MODEL_EMBEDDING: text-embedding-3-small
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  index-policies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install -r scripts/requirements.txt
+
+      - name: Login to Azure using OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and populate policy-fragments-v1
+        run: |
+          python scripts/index_policies.py
