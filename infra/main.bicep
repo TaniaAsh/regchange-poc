@@ -148,17 +148,18 @@ resource eventGridSubscription 'Microsoft.EventGrid/systemTopics/eventSubscripti
       includedEventTypes: [
         'Microsoft.Storage.BlobCreated'
       ]
-      subjectBeginsWith: '/blobServices/default/containers/regulatory-documents/'
+      subjectBeginsWith: '/blobServices/default/containers/regulatory-documents/blobs/'
     }
     eventDeliverySchema: 'EventGridSchema'
     retryPolicy: {
-      maxDeliveryAttempts: 5
-      eventTimeToLiveInMinutes: 60
+      // Matches the values already tuned and running in Azure (surfaced by
+      // `what-if` as a diff against this file's original, tighter defaults):
+      // generous enough for active PoC debugging, where a while can pass
+      // between an upload and noticing/fixing an issue.
+      maxDeliveryAttempts: 30
+      eventTimeToLiveInMinutes: 1440
     }
   }
-  dependsOn: [
-    functionApp
-  ]
 }
 
 // --- RBAC: grant the Function App's managed identity exactly what it needs,
