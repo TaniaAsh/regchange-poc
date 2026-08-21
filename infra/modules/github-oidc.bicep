@@ -3,13 +3,7 @@ param identityName string = 'regchange-poc-github-deploy'
 
 param location string = resourceGroup().location
 
-@description('GitHub org/user and repo, e.g. TaniaAsh/regchange-poc')
-param githubRepo string = 'TaniaAsh/regchange-poc'
-
-@description('Branch this identity is trusted for — matches deploy-function.yml\'s push trigger')
-param githubBranch string = 'main'
-
-@description('The exact subject claim GitHub issues for this repo. This tenant has GitHub\'s "use repository ID" (immutable identifiers) option enabled, so the subject includes numeric account/repo IDs, not just names — found by inspecting the already-existing federated credential with `az identity federated-credential list`, not guessable generically.')
+@description('The exact subject claim GitHub issues for this repo. This tenant has GitHub\'s "use repository ID" (immutable identifiers) option enabled, so the subject includes numeric account/repo IDs, not just names — found by inspecting the already-existing federated credential with `az identity federated-credential list`, not guessable generically. Corresponds to TaniaAsh/regchange-poc, branch main.')
 param githubSubject string = 'repo:TaniaAsh@10188197/regchange-poc@1341169360:ref:refs/heads/main'
 
 // User-Assigned Managed Identity creation is idempotent by name: if
