@@ -1,0 +1,5 @@
+# Same core Azure dependencies as src/function_app/requirements.txt —
+# this script reuses pipeline.foundry_client, so versions should stay aligned.
+azure-search-documents>=11.5.1
+azure-identity>=1.17.0
+openai>=1.50.0
