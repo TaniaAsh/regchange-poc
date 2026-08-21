@@ -100,11 +100,10 @@ module functionApp 'modules/function-app.bicep' = {
   name: 'function-app-deployment'
   params: {
     functionAppName: functionAppName
-    // Deliberately NOT the shared `location` (uksouth) — this subscription
-    // has 0 compute quota there. eastus is where the Foundry resource
-    // already lives and has proven active quota. Storage/Search/KeyVault
-    // stay in uksouth; resources within one resource group don't need to
-    // share a region.
+    // uksouth and eastus both reported 0 compute quota on this subscription
+    // (root cause turned out to be an unregistered Microsoft.Compute
+    // resource provider, since fixed) — ukwest already had working quota
+    // when this was deployed, so it stayed here rather than reverting.
     location: 'ukwest'
     storageAccountName: storage.outputs.storageAccountName
     appInsightsConnectionString: appInsights.outputs.connectionString
@@ -116,6 +115,50 @@ module functionApp 'modules/function-app.bicep' = {
     foundryModelAnalysis: foundryModelAnalysis
     outputContainerName: outputContainerName
   }
+}
+
+// Must match the Python function's decorator name in function_app.py exactly.
+var targetFunctionName = 'process_new_document'
+
+resource existingSystemTopic 'Microsoft.EventGrid/systemTopics@2024-06-01-preview' existing = {
+  name: systemTopicName
+}
+
+// Native `AzureFunction` destination (resourceId reference) instead of a
+// `WebHook` destination with a manually-retrieved system key. WebHook
+// destinations validate the live endpoint at subscription-creation time,
+// which would have meant the function had to already exist and be running
+// code first — a two-phase deployment. AzureFunction destinations reference
+// the function by resource ID rather than calling it, so that constraint
+// doesn't apply. This reconciles into IaC an Event Grid subscription that,
+// until now, only existed as a manual change made directly in Azure.
+resource eventGridSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2024-06-01-preview' = {
+  parent: existingSystemTopic
+  name: 'regulatory-document-created'
+  properties: {
+    destination: {
+      endpointType: 'AzureFunction'
+      properties: {
+        resourceId: '${functionApp.outputs.functionAppId}/functions/${targetFunctionName}'
+        maxEventsPerBatch: 1
+        preferredBatchSizeInKilobytes: 64
+      }
+    }
+    filter: {
+      includedEventTypes: [
+        'Microsoft.Storage.BlobCreated'
+      ]
+      subjectBeginsWith: '/blobServices/default/containers/regulatory-documents/'
+    }
+    eventDeliverySchema: 'EventGridSchema'
+    retryPolicy: {
+      maxDeliveryAttempts: 5
+      eventTimeToLiveInMinutes: 60
+    }
+  }
+  dependsOn: [
+    functionApp
+  ]
 }
 
 // --- RBAC: grant the Function App's managed identity exactly what it needs,
@@ -184,7 +227,6 @@ resource searchRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
     principalType: 'ServicePrincipal'
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', searchIndexDataReaderRoleId)
   }
-  
 }
 
 // Lets the Function App resolve the @Microsoft.KeyVault(...) references in

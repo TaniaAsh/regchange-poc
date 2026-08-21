@@ -46,6 +46,14 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
         }
+        {
+          // Required for the Python v2 programming model (decorator-based
+          // functions, like the Event Grid trigger here) to be discovered
+          // correctly in some hosting scenarios — missing this caused the
+          // deployed function to not register at all.
+          name: 'AzureWebJobsFeatureFlags'
+          value: 'EnableWorkerIndexing'
+        }
         // Identity-based storage connection — no connection string, no key.
         // Requires the role assignments granted in main.bicep (Storage Blob
         // Data Owner, Storage Queue/Table Data Contributor).
