@@ -1,0 +1,92 @@
+name: Deploy Regulatory Change Function
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - "src/function_app/**"
+      - ".github/workflows/deploy-function.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  FUNCTION_APP_NAME: regchangepoc-func-5q4n3y5rwo4dc
+  RESOURCE_GROUP: rg-regchange-poc
+  STORAGE_ACCOUNT: regchgst5q4n3y5rwo4dc
+  RELEASE_CONTAINER: function-releases
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Function dependencies
+        working-directory: src/function_app
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            --target=".python_packages/lib/site-packages" \
+            -r requirements.txt
+
+      - name: Create deployment package
+        working-directory: src/function_app
+        run: |
+          zip -r "../../functionapp-${GITHUB_SHA}.zip" . \
+            -x "*.pyc" \
+            -x "__pycache__/*" \
+            -x ".venv/*"
+
+      - name: Login to Azure using OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Upload deployment package
+        run: |
+          PACKAGE_NAME="functionapp-${GITHUB_SHA}.zip"
+
+          az storage blob upload \
+            --account-name "$STORAGE_ACCOUNT" \
+            --container-name "$RELEASE_CONTAINER" \
+            --name "$PACKAGE_NAME" \
+            --file "$PACKAGE_NAME" \
+            --auth-mode login \
+            --overwrite true
+
+          PACKAGE_URL="https://${STORAGE_ACCOUNT}.blob.core.windows.net/${RELEASE_CONTAINER}/${PACKAGE_NAME}"
+          echo "PACKAGE_URL=$PACKAGE_URL" >> "$GITHUB_ENV"
+
+      - name: Point Function App to deployment package
+        run: |
+          az functionapp config appsettings set \
+            --name "$FUNCTION_APP_NAME" \
+            --resource-group "$RESOURCE_GROUP" \
+            --settings "WEBSITE_RUN_FROM_PACKAGE=$PACKAGE_URL"
+
+      - name: Sync Function triggers
+        run: |
+          FUNCTION_ID=$(az functionapp show \
+            --name "$FUNCTION_APP_NAME" \
+            --resource-group "$RESOURCE_GROUP" \
+            --query id \
+            -o tsv)
+
+          az rest \
+            --method post \
+            --url "https://management.azure.com${FUNCTION_ID}/syncfunctiontriggers?api-version=2022-03-01"
