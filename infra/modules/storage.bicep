@@ -8,6 +8,7 @@ param containerNames array = [
   'regulatory-documents'
   'internal-policies'
   'impact-hypotheses'
+  'function-releases'
 ]
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {

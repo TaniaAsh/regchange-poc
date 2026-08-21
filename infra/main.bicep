@@ -78,6 +78,18 @@ module keyVault 'modules/key-vault.bicep' = {
   }
 }
 
+// Formalizes an identity that was previously created manually in Azure for
+// GitHub Actions OIDC login (see .github/workflows/deploy-function.yml).
+// Managed Identity creation is idempotent by name, so this brings the
+// existing identity under IaC management without disrupting it or changing
+// its principalId/clientId — GitHub Actions keeps working unmodified.
+module githubOidc 'modules/github-oidc.bicep' = {
+  name: 'github-oidc-deployment'
+  params: {
+    location: location
+  }
+}
+
 // Azure AI Search service is NOT deployed via a module here — the Free tier
 // allows only 1 per subscription, this PoC's search service already exists
 // (created in an earlier run before Key Vault failed and blocked the rest),
@@ -172,6 +184,16 @@ var storageTableDataContributorRoleId = '0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3'
 var searchIndexDataReaderRoleId = '1407120a-92aa-4202-b7e9-c0e197c71c8f'
 var keyVaultSecretsUserRoleId = '4633458b-17de-408a-b874-0445c86b69e6'
 
+// --- Roles below are for the GitHub Actions deployment identity, not the
+// Function App's own identity. Double-check these four GUIDs with
+// `az role definition list --name "<role name>"` before relying on them —
+// unlike the roles above (already deployed and confirmed working), these
+// are new and only verified against documentation, not a live deployment.
+var storageBlobDataContributorRoleId = 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
+var websiteContributorRoleId = 'de139f84-1756-47ae-9be6-808fbbe84772'
+var searchServiceContributorRoleId = '7ca78c08-252a-4471-8644-bb5ff32d4ba0'
+var searchIndexDataContributorRoleId = '8ebe5a00-799e-43f5-93ac-243d3dce84a7'
+
 resource existingStorage 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   name: storageAccountName
 }
@@ -182,6 +204,13 @@ resource existingSearch 'Microsoft.Search/searchServices@2024-06-01-preview' exi
 
 resource existingKeyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
+}
+
+// For the Website Contributor role assignment below — the GitHub Actions
+// workflow calls `az functionapp config appsettings set` and `az functionapp
+// restart`, which need this scope specifically, not just Storage.
+resource existingFunctionAppSite 'Microsoft.Web/sites@2023-01-01' existing = {
+  name: functionAppName
 }
 
 // Blob/Queue/Table Data roles: required for the identity-based
@@ -242,6 +271,56 @@ resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04
   }
 }
 
+// --- RBAC for the GitHub Actions deployment identity. Least-privilege
+// per concrete need in deploy-function.yml / the future indexing workflow —
+// same principle as the Function App's own roles above, just a different
+// principal and a fixed guid seed (githubOidc's own resource name is fine
+// here since, unlike principalId, the module name is deterministic).
+
+resource githubStorageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(existingStorage.id, 'github-deploy', storageBlobDataContributorRoleId)
+  scope: existingStorage
+  properties: {
+    principalId: githubOidc.outputs.identityPrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataContributorRoleId)
+  }
+}
+
+// Needed for `az functionapp config appsettings set` / `az functionapp
+// restart` / syncfunctiontriggers in deploy-function.yml.
+resource githubWebsiteRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(existingFunctionAppSite.id, 'github-deploy', websiteContributorRoleId)
+  scope: existingFunctionAppSite
+  properties: {
+    principalId: githubOidc.outputs.identityPrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', websiteContributorRoleId)
+  }
+}
+
+// For the not-yet-built indexing workflow (scripts/index_policies.py run via
+// GitHub Actions) to create/update the search index and upload documents.
+resource githubSearchServiceRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(existingSearch.id, 'github-deploy', searchServiceContributorRoleId)
+  scope: existingSearch
+  properties: {
+    principalId: githubOidc.outputs.identityPrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', searchServiceContributorRoleId)
+  }
+}
+
+resource githubSearchIndexRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(existingSearch.id, 'github-deploy', searchIndexDataContributorRoleId)
+  scope: existingSearch
+  properties: {
+    principalId: githubOidc.outputs.identityPrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', searchIndexDataContributorRoleId)
+  }
+}
+
 // Cross-resource-group role assignment on the pre-existing Foundry
 // resource — deployed with an explicit scope override since it lives
 // outside this resource group.
@@ -255,9 +334,24 @@ module foundryRoleAssignment 'modules/foundry-role-assignment.bicep' = {
   }
 }
 
+// Same role, different principal: the future indexing script (run via
+// GitHub Actions) needs to call Foundry's embedding deployment directly,
+// same as the Function App runtime does.
+module githubFoundryRoleAssignment 'modules/foundry-role-assignment.bicep' = {
+  name: 'github-foundry-role-assignment-deployment'
+  scope: resourceGroup(foundryResourceGroupName)
+  params: {
+    foundryAccountName: foundryAccountName
+    principalId: githubOidc.outputs.identityPrincipalId
+    functionAppNameForGuidSeed: 'github-deploy'
+  }
+}
+
 output functionAppName string = functionApp.outputs.functionAppName
 output functionAppPrincipalId string = functionApp.outputs.principalId
 output storageAccountName string = storage.outputs.storageAccountName
 output searchServiceName string = searchServiceName
 output keyVaultName string = keyVault.outputs.keyVaultName
 output eventGridSystemTopicName string = eventGridTopic.outputs.systemTopicName
+output githubIdentityClientId string = githubOidc.outputs.identityClientId
+output githubIdentityPrincipalId string = githubOidc.outputs.identityPrincipalId
