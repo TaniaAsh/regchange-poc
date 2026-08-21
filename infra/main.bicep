@@ -24,7 +24,10 @@ param searchIndexName string = 'policy-fragments-v1'
 // the same names (idempotent), while a fresh RG gets fresh globally-unique
 // names automatically — no manual name bookkeeping required.
 var suffix = uniqueString(resourceGroup().id)
-var storageAccountName = toLower('${baseName}st${suffix}')
+// Storage account names must be <= 24 chars, lowercase alphanumeric only —
+// deliberately not derived from baseName (which can be up to 15 chars) to
+// guarantee this stays safely under the limit no matter what baseName is set to.
+var storageAccountName = toLower('regchgst${suffix}')
 var searchServiceName = toLower('${baseName}-search-${suffix}')
 var keyVaultName = toLower('${baseName}-kv-${suffix}')
 var functionAppName = toLower('${baseName}-func-${suffix}')
@@ -117,15 +120,15 @@ var searchIndexDataReaderRoleId = '1407120a-92aa-4202-b7e9-c0e197c71c8f'
 var keyVaultSecretsUserRoleId = '4633458b-17de-408a-b874-0445c86b69e6'
 
 resource existingStorage 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: storage.outputs.storageAccountName
+  name: storageAccountName
 }
 
 resource existingSearch 'Microsoft.Search/searchServices@2024-06-01-preview' existing = {
-  name: search.outputs.searchServiceName
+  name: searchServiceName
 }
 
 resource existingKeyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
-  name: keyVault.outputs.keyVaultName
+  name: keyVaultName
 }
 
 // Blob/Queue/Table Data roles: required for the identity-based
@@ -133,7 +136,7 @@ resource existingKeyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
 // pipeline's own blob reads/writes to regulatory-documents /
 // impact-hypotheses (see function_app.py).
 resource storageBlobRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(existingStorage.id, functionApp.outputs.principalId, storageBlobDataOwnerRoleId)
+  name: guid(existingStorage.id, functionAppName, storageBlobDataOwnerRoleId)
   scope: existingStorage
   properties: {
     principalId: functionApp.outputs.principalId
@@ -143,7 +146,7 @@ resource storageBlobRoleAssignment 'Microsoft.Authorization/roleAssignments@2022
 }
 
 resource storageQueueRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(existingStorage.id, functionApp.outputs.principalId, storageQueueDataContributorRoleId)
+  name: guid(existingStorage.id, functionAppName, storageQueueDataContributorRoleId)
   scope: existingStorage
   properties: {
     principalId: functionApp.outputs.principalId
@@ -153,7 +156,7 @@ resource storageQueueRoleAssignment 'Microsoft.Authorization/roleAssignments@202
 }
 
 resource storageTableRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(existingStorage.id, functionApp.outputs.principalId, storageTableDataContributorRoleId)
+  name: guid(existingStorage.id, functionAppName, storageTableDataContributorRoleId)
   scope: existingStorage
   properties: {
     principalId: functionApp.outputs.principalId
@@ -165,19 +168,22 @@ resource storageTableRoleAssignment 'Microsoft.Authorization/roleAssignments@202
 // Read-only — the pipeline queries the index, it never writes to it in this
 // PoC (index population is a separate, not-yet-built step; see ARCHITECTURE.md).
 resource searchRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(existingSearch.id, functionApp.outputs.principalId, searchIndexDataReaderRoleId)
+  name: guid(existingSearch.id, functionAppName, searchIndexDataReaderRoleId)
   scope: existingSearch
   properties: {
     principalId: functionApp.outputs.principalId
     principalType: 'ServicePrincipal'
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', searchIndexDataReaderRoleId)
   }
+  dependsOn: [
+    search
+  ]
 }
 
 // Lets the Function App resolve the @Microsoft.KeyVault(...) references in
 // its own App Settings.
 resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(existingKeyVault.id, functionApp.outputs.principalId, keyVaultSecretsUserRoleId)
+  name: guid(existingKeyVault.id, functionAppName, keyVaultSecretsUserRoleId)
   scope: existingKeyVault
   properties: {
     principalId: functionApp.outputs.principalId
@@ -195,6 +201,7 @@ module foundryRoleAssignment 'modules/foundry-role-assignment.bicep' = {
   params: {
     foundryAccountName: foundryAccountName
     principalId: functionApp.outputs.principalId
+    functionAppNameForGuidSeed: functionAppName
   }
 }
 
