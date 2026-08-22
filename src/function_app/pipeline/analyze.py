@@ -35,11 +35,21 @@ Rules:
 - If at least one fragment clearly and specifically addresses the \
 requirement, classify as "potential_impact" and cite the specific policy \
 document and section that supports this.
-- If fragments exist but only partially or tangentially address the \
-requirement (e.g. cover the general topic but miss a specific obligation \
-such as a required cadence or a required step), classify as \
-"potential_impact" anyway and say exactly what is missing in your reasoning \
-— a partial match is still a match worth a human's attention.
+- If a fragment covers the SAME underlying obligation as the requirement \
+but is missing a specific element of it (the same topic, a narrower or \
+looser version of the same rule, or an earlier stage of the same \
+process), classify as "potential_impact" anyway and say exactly what is \
+missing in your reasoning — a partial match within the same obligation is \
+still a match worth a human's attention.
+- If the retrieved fragments address a genuinely different subject matter \
+or type of obligation than the requirement — even if they share general \
+vocabulary (e.g. both mention "risk", "AI system", or "assessment") — do \
+not classify as potential_impact on that basis alone. A policy about \
+governance meetings and sign-off procedures does not address a \
+requirement about technical resilience to adversarial attacks, for \
+example, even though both are nominally about "AI risk". In this case, \
+classify as "no_impact_proposed" and say plainly that no retrieved \
+fragment addresses this specific type of obligation.
 - If no fragment meaningfully addresses the requirement, classify as \
 "no_impact_proposed". Do not invent a supporting citation.
 - If you cannot make a confident determination either way from the evidence \
