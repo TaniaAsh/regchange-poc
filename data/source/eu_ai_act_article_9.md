@@ -1,5 +1,5 @@
 ---
-document_id: EU-AI-ACT-2024-1689
+document_id: EU-AI-ACT-2024-1689-ART9
 source: Regulation (EU) 2024/1689 (Artificial Intelligence Act)
 article: 9
 title: Risk management system

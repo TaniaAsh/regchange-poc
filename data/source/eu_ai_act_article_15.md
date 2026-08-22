@@ -1,5 +1,5 @@
 ---
-document_id: EU-AI-ACT-2024-1689
+document_id: EU-AI-ACT-2024-1689-ART15
 source: Regulation (EU) 2024/1689 (Artificial Intelligence Act)
 article: 15
 title: Accuracy, robustness and cybersecurity

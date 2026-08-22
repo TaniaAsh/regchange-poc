@@ -1,5 +1,5 @@
 ---
-document_id: EU-AI-ACT-2024-1689
+document_id: EU-AI-ACT-2024-1689-ART13
 source: Regulation (EU) 2024/1689 (Artificial Intelligence Act)
 article: 13
 title: Transparency and provision of information to deployers
