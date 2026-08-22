@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART13-R6",
+  "classification": "potential_impact",
+  "reasoning": "The provided policy fragments partially address aspects of the regulatory requirement. ACME-POL-AIGOV-002 section 5 (Risk Assessment Prior to Deployment) requires documenting intended purpose/use cases and 'Known limitations of the model or system' prior to deployment, which maps to the regulatory theme of describing limitations and intended capabilities. Section 3 (AI System Inventory) also requires capturing intended purpose in inventory metadata. However, the fragments do not explicitly require (a) inclusion of these characteristics, capabilities and limitations in the end‑user 'instructions for use', nor (b) specification of the system's performance characteristics and capabilities (e.g., performance metrics, error rates, operating conditions, applicable population, or concrete limitations on performance) to be provided to users. They also do not state the form, level of detail, or placement (instructions for use) that the regulator requires. Therefore there is a potential impact: existing policy partially covers the topic but is missing explicit obligations to produce user-facing instructions that include the system’s characteristics, capabilities, and performance limitations and to specify the performance information that must be disclosed.",
+  "citations": {
+    "external": "Article 13(3)(b)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03333333507180214
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "3. AI System Inventory",
+      "excerpt": "All AI systems must be registered in the Acme Bank AI System Inventory prior to\ndeployment, with the following minimum metadata: system name, business owner,\nintended purpose, data sources, and deployment date.",
+      "relevance_score": 0.032522473484277725
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.03028232976794243
+    }
+  ],
+  "confidence": 0.75,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:33:08.688124+00:00"
+}

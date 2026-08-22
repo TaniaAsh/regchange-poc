@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R7",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved fragments show existing risk-assessment and model-risk-management practices that relate to the requirement in Article 9(3): ACME-POL-AIGOV-002 (section 5) requires a Pre-Deployment Risk Assessment covering intended purpose, known limitations, fairness/bias, etc., and ACME-POL-MRM-003 (section 1) establishes requirements for identifying, assessing and managing model risk. These fragments therefore indicate the organization has processes that could be used to address the Article 9(3) obligation that risks be those that can be mitigated via development/design or by providing technical information. However, none of the provided fragments explicitly implements the specific limitation in Article 9(3) that the risk-management system should concern only risks that may be reasonably mitigated or eliminated through development/design or provision of adequate technical information. Missing elements include: (a) an explicit rule or criteria to limit the scope of managed risks to only those reasonably mitigable by design or technical information; (b) a definition of “reasonably mitigable” or decision criteria for excluding unmitigable risks from the risk-management system; (c) an obligation to document when a risk cannot be mitigated by design or technical information and how such risks are otherwise handled; and (d) an explicit requirement to provide adequate technical information as a risk mitigation measure where applicable. Because the fragments partially address the topic but do not capture these specific obligations from Article 9(3), this is a potential impact that needs remediation or confirmation by updating policy to explicitly map to the Article 9(3) limitation and required controls.",
+  "citations": {
+    "external": "Article 9(3)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.030414745211601257
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.03028232976794243
+    }
+  ],
+  "confidence": 0.6,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:32:13.041034+00:00"
+}

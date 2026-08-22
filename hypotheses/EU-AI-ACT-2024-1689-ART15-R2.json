@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART15-R2",
+  "classification": "potential_impact",
+  "reasoning": "The bank policy fragment ACME-POL-MRM-003 §3 (Initial Validation) explicitly requires \"Outcome analysis and benchmark comparison,\" which indicates the organisation uses benchmarks and compares model outcomes against them. §6 (Model Performance Monitoring) also requires monitoring performance \"against the metrics agreed at validation,\" and §5 (Annual Revalidation) codifies repeating validation steps against current data and performance. These elements align with the regulatory topic of benchmarks and measurement methodologies for accuracy/performance. However, the retrieved fragments do not address key elements of Article 15(2): there is no reference to cooperating with external stakeholders or metrology/benchmarking authorities, no requirement to encourage or participate in the development of benchmarks or measurement methodologies across stakeholders, and no explicit coverage of robustness measurement methodologies. Therefore this internal policy is a partial match (it covers internal benchmarking and performance measurement) but is missing the external cooperation and encouragement aspects mandated by the Article. A human Compliance Analyst should review and confirm whether existing internal procedures need extension to include external stakeholder cooperation and formal engagement in benchmark/methodology development.",
+  "citations": {
+    "external": "Article 15(2)",
+    "internal": "ACME-POL-MRM-003, 3. Initial Validation"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "6. Model Performance Monitoring",
+      "excerpt": "Business units are responsible for monitoring the ongoing performance of models\nunder their ownership against the metrics agreed at validation, and escalating\nmaterial performance degradation to the Model Risk Function outside of the\nscheduled annual revalidation cycle.",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "5. Annual Revalidation",
+      "excerpt": "All Tier 1 and Tier 2 models are subject to a formal revalidation exercise on an\n**annual basis**, repeating the initial validation steps in Section 3 against\ncurrent data and current model performance.",
+      "relevance_score": 0.030477948486804962
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "3. Initial Validation",
+      "excerpt": "Prior to first use, every model must undergo independent validation by the Model\nRisk Function, covering:\n\n- Conceptual soundness of the model design\n- Data quality and representativeness of training/validation data\n- Outcome analysis and benchmark comparison\n- Identification of known limitations and boundary conditions",
+      "relevance_score": 0.030017919838428497
+    }
+  ],
+  "confidence": 0.85,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:51:21.096969+00:00"
+}

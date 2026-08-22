@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART15-R4",
+  "classification": "potential_impact",
+  "reasoning": "Fragment ACME-POL-AIGOV-002 section 5 (Pre-Deployment Risk Assessment) partially addresses the regulator's resilience requirement by requiring a pre-deployment risk assessment that includes 'known limitations of the model or system.' This indicates the policy expects identification of weaknesses prior to deployment, which is relevant to resilience. However, the fragment does not explicitly require the specific resilience measures called for by Article 15(4): there is no mention of mandatory testing or mitigation for errors, faults or inconsistencies; no requirements for fault-tolerance, robustness testing under interaction with natural persons or other systems, runtime monitoring or automated fallback/containment procedures; and no explicit requirement for ongoing validation or operational resilience controls. Section 3 (AI System Inventory) and section 2 (Scope) show organizational coverage but do not add requirements about resilience. Because section 5 covers the same underlying obligation area (assessment of limitations/risks) but is missing explicit resilience-specific elements, this is a partial match that warrants human Compliance Analyst review rather than a conclusion of full compliance.",
+  "citations": {
+    "external": "Article 15(4)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "3. AI System Inventory",
+      "excerpt": "All AI systems must be registered in the Acme Bank AI System Inventory prior to\ndeployment, with the following minimum metadata: system name, business owner,\nintended purpose, data sources, and deployment date.",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.03177805617451668
+    }
+  ],
+  "confidence": 0.6,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:51:35.823600+00:00"
+}

@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART13-R2",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved policy fragment ACME-POL-CCPD-001 §4 (Automated Decisioning Disclosures) directly addresses transparency for outcomes materially influenced by automated systems: it requires a customer-facing statement that automated processing was used and a route to request human review. That is a clear, specific transparency requirement and therefore indicates a potential impact with respect to Article 13(1). ACME-POL-CCPD-001 §3 (Product Disclosure Requirements) also shows general transparency practices (product description, risks, fees, contact details), which is relevant background. However, the fragments do not define the “appropriate type and degree of transparency” called for in Article 13(1) nor do they map transparency obligations to the (unsupplied) detailed obligations in Section 3 of the regulation. Missing details include: which parties (provider vs deployer) must provide which disclosures; the required level of detail and format of disclosures; timing/cadence (pre-contractual, real-time, post-decision); evidence/recordkeeping to demonstrate compliance; accessibility/language/placement requirements; and whether disclosures must cover model governance, performance, limitations, or risk mitigation measures. Because the policy contains relevant, specific items (notably §4) but lacks the full set of elements the Article appears to require, this is a potential impact that warrants Compliance Analyst review and possible policy elaboration.",
+  "citations": {
+    "external": "Article 13(1)",
+    "internal": "ACME-POL-CCPD-001, 4. Automated Decisioning Disclosures"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "3. Product Disclosure Requirements",
+      "excerpt": "Product disclosure documents must include:\n\n- A description of the product and its intended use\n- Key risks associated with the product\n- Fees and charges\n- Contact details for customer support and complaints",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "4. Automated Decisioning Disclosures",
+      "excerpt": "Where a product decision (e.g. an application outcome) is materially influenced by\nan automated system, the customer-facing communication must include a general\nstatement that automated processing was used and provide a route to request human\nreview, in line with existing consumer protection commitments.",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "4. Model Risk Committee Approval",
+      "excerpt": "Tier 1 models require sign-off from the Model Risk Committee before deployment.\nTier 2 and Tier 3 models require sign-off from the Head of Model Risk.",
+      "relevance_score": 0.03021353855729103
+    }
+  ],
+  "confidence": 0.65,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:32:30.255639+00:00"
+}

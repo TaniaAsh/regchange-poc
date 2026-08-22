@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART15-R3",
+  "classification": "potential_impact",
+  "reasoning": "The Pre-Deployment Risk Assessment (ACME-POL-AIGOV-002 §5) covers model/system \"known limitations\" and data quality, which is related to accuracy considerations for AI systems; the policy also defines high-impact/high-risk oversight (ACME-POL-AIGOV-002 §4) and applies to all production AI (§2). However, none of the fragments explicitly require that the \"levels of accuracy\" or the \"relevant accuracy metrics\" be declared in the accompanying instructions for use. Missing elements: (1) an explicit obligation to compute and record specific accuracy metrics, (2) a requirement that these metrics be included in the user-facing instructions of use, and (3) an explicit tie to \"high-risk\" AI systems for the declaration requirement. A human Compliance Analyst should review and confirm whether the existing risk-assessment and sign-off controls are intended to satisfy the Article 15(3) obligation or whether a policy amendment is needed to mandate declaration of accuracy levels and metrics in the instructions for use.",
+  "citations": {
+    "external": "Article 15(3)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.030886195600032806
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "4. Governance Committee",
+      "excerpt": "The AI Governance Committee (AIGC) meets monthly and is the approval body for any\nAI system classified as \"high impact\" under the Acme Bank AI Risk Tiering\nFramework (see Section 5).",
+      "relevance_score": 0.03083491325378418
+    }
+  ],
+  "confidence": 0.65,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:51:27.752783+00:00"
+}

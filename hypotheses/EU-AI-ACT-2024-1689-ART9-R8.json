@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R8",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved Acme Bank Model Risk Management Standard (ACME-POL-MRM-003, section 1. Purpose) establishes high-level requirements for identifying, assessing, and managing model risk, which is directly in scope of the regulatory obligation to apply risk management measures. Sections on tiering (section 2) and governance/sign-off (section 4) further show existing controls for assessing model materiality and obtaining approvals. However, none of the provided fragments explicitly require or describe giving ‘due consideration to the effects and possible interaction resulting from the combined application of the requirements’ (i.e., explicit assessment of interactions between multiple requirements/measures, guidance on aggregating or balancing competing controls, or processes to minimize risk arising from combined effects). Missing elements include an explicit mandate to assess interactions of co-applied requirements, specified methods or metrics for evaluating combined effects, assignment of responsibilities for that analysis, required documentation or reporting of such interaction assessments, and any cadence or escalation procedures to address adverse interaction findings. Because the policy fragments partially cover the general topic of model risk management but do not explicitly implement the specific obligation in Article 9(4), there is a potential impact that the existing standard will need amendment or augmentation to meet this regulatory requirement.",
+  "citations": {
+    "external": "Article 9(4)",
+    "internal": "ACME-POL-MRM-003, 1. Purpose (also: sections 2 and 4 are relevant but do not address interactions)"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.03229166567325592
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "4. Model Risk Committee Approval",
+      "excerpt": "Tier 1 models require sign-off from the Model Risk Committee before deployment.\nTier 2 and Tier 3 models require sign-off from the Head of Model Risk.",
+      "relevance_score": 0.03154495730996132
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "2. Model Risk Tiering",
+      "excerpt": "Every model is assigned a risk tier (Tier 1 to Tier 3) at initial validation based\non materiality of use, complexity, and potential impact if the model performs\nincorrectly.",
+      "relevance_score": 0.03083491325378418
+    }
+  ],
+  "confidence": 0.7,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:32:25.594310+00:00"
+}

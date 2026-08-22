@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-R13",
+  "classification": "potential_impact",
+  "reasoning": "The provided fragment ACME-POL-AIGOV-002 section 5 (Pre-Deployment Risk Assessment) requires a pre-deployment risk assessment and sign-off from the AI Governance Committee for high-impact systems, which indicates the organization has a process for assessing risks prior to deployment. This is a partial match to the Article 9(5) obligation to ensure risk management measures produce an acceptable residual risk.However, the fragment does not explicitly require (a) evaluation of residual risk for each identified hazard, (b) aggregation/assessment of the overall residual risk for the high-risk AI system, or (c) defined acceptability criteria/thresholds or evidence that the applied risk management measures reduce risks to an explicitly judged acceptable level. The governance-committee sign-off (section 4) and the Model Risk Management Standard (ACME-POL-MRM-003) suggest oversight and model-risk processes but do not provide the missing specifics. Therefore there is a potential impact (policy area to review) but key elements required by Article 9(5) are not explicit in the fragments: explicit per-hazard residual-risk evaluation, overall residual-risk judgement, acceptability criteria, and required documentation/evidence showing measures achieved acceptable residual risk.",
+  "citations": {
+    "external": "Article 9(5)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "4. Governance Committee",
+      "excerpt": "The AI Governance Committee (AIGC) meets monthly and is the approval body for any\nAI system classified as \"high impact\" under the Acme Bank AI Risk Tiering\nFramework (see Section 5).",
+      "relevance_score": 0.03201844170689583
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.030621785670518875
+    }
+  ],
+  "confidence": 0.75,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T00:09:34.922446+00:00"
+}

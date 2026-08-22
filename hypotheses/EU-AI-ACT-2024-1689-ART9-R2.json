@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R2",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved policy fragments show some relevant controls but do not fully demonstrate the continuous, iterative lifecycle risk-management required by Article 9(2). Section 5 (Pre-Deployment Risk Assessment) documents a required risk assessment before production (intended purpose; data quality; limitations; fairness; AIGC sign-off for high-impact systems), which maps to the ‘planned’ element of risk management and initial assessment. Section 6 assigns governance roles (Chief AI Officer; AI Governance Committee; Business Unit Owner; Model Risk Function), which supports accountability for running risk management. Section 2 establishes the policy scope for production AI. However, none of the fragments explicitly requires a continuous iterative process across the entire lifecycle, nor do they specify regular, systematic review and update activities, monitoring cadence, triggers for re-assessment, or responsibilities for ongoing updates. Therefore there is a potential impact: the policy partly addresses the requirement (initial assessment and governance) but appears to lack explicit lifecycle-continuous monitoring and regular review/update processes required by Article 9(2). A human Compliance Analyst should verify whether other internal standards (e.g., an operational monitoring standard or lifecycle risk-management procedure) exist to close this gap.",
+  "citations": {
+    "external": "Article 9(2)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "6. Roles and Responsibilities",
+      "excerpt": "- **Chief AI Officer**: overall accountability for the AI governance framework\n- **AI Governance Committee**: approval authority for high-impact systems\n- **Business Unit Owner**: day-to-day operational accountability for each system\n- **Model Risk Function**: independent review of model risk (see the separate\n  Model Risk Management Standard)",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.028949543833732605
+    }
+  ],
+  "confidence": 0.6,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:31:27.574627+00:00"
+}

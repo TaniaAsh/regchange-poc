@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART13-R5",
+  "classification": "potential_impact",
+  "reasoning": "The provided policy fragment (ACME-POL-CCPD-001, section 3) requires product disclosure documents to include contact details for customer support and complaints, which partially aligns with the regulatory requirement to include contact details. However, the fragment does not explicitly require (a) the identity of the provider to be included, (b) the inclusion of the identity or contact details of an authorised representative where applicable, or (c) that these items appear specifically in the \"instructions for use.\" Section 5 (review and approval) indicates Legal and Compliance sign-off for communications, which could help ensure regulatory alignment but does not itself establish the missing content. Human review is needed to confirm whether existing templates or other policy sections address the provider identity and authorised representative requirements or mandate placement within instructions for use.",
+  "citations": {
+    "external": "Article 13(3)(a)",
+    "internal": "ACME-POL-CCPD-001, 3. Product Disclosure Requirements"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "3. Product Disclosure Requirements",
+      "excerpt": "Product disclosure documents must include:\n\n- A description of the product and its intended use\n- Key risks associated with the product\n- Fees and charges\n- Contact details for customer support and complaints",
+      "relevance_score": 0.03333333507180214
+    },
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "4. Automated Decisioning Disclosures",
+      "excerpt": "Where a product decision (e.g. an application outcome) is materially influenced by\nan automated system, the customer-facing communication must include a general\nstatement that automated processing was used and provide a route to request human\nreview, in line with existing consumer protection commitments.",
+      "relevance_score": 0.032786883413791656
+    },
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "5. Review and Approval",
+      "excerpt": "All new or materially changed customer communications require sign-off from\nLegal and Compliance prior to publication.",
+      "relevance_score": 0.0320020467042923
+    }
+  ],
+  "confidence": 0.75,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:33:00.159018+00:00"
+}

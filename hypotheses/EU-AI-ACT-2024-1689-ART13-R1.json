@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART13-R1",
+  "classification": "potential_impact",
+  "reasoning": "The Pre-Deployment Risk Assessment (ACME-POL-AIGOV-002 §5) requires documenting 'known limitations of the model or system' and sign-off for high-impact systems, which partially supports the regulator's transparency objective by encouraging disclosure of limitations prior to deployment. The policy scope (ACME-POL-AIGOV-002 §2) applying to all production AI systems and the roles/responsibilities section (ACME-POL-AIGOV-002 §6) that assigns approval and accountability further indicate governance coverage for high-risk systems. However, the fragments do not specify concrete design/development requirements to make operation \"sufficiently transparent\" for deployers (for example: required explanatory outputs or interfaces, documentation formats such as model cards, mandated interpretability techniques, runtime explainability capabilities, guidance/training for deployers on interpreting outputs, or required metrics such as uncertainty/confidence reporting). They also do not define what counts as \"sufficiently transparent\" or prescribe how to validate that transparency during design and development. Therefore the policy is a partial match and warrants further attention to add explicit design/development obligations and acceptance criteria to meet Article 13(1).",
+  "citations": {
+    "external": "Article 13(1)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03333333507180214
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "6. Roles and Responsibilities",
+      "excerpt": "- **Chief AI Officer**: overall accountability for the AI governance framework\n- **AI Governance Committee**: approval authority for high-impact systems\n- **Business Unit Owner**: day-to-day operational accountability for each system\n- **Model Risk Function**: independent review of model risk (see the separate\n  Model Risk Management Standard)",
+      "relevance_score": 0.032522473484277725
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.03109932318329811
+    }
+  ],
+  "confidence": 0.8,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:32:19.029485+00:00"
+}

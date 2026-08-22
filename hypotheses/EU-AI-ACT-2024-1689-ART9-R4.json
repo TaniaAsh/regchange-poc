@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R4",
+  "classification": "potential_impact",
+  "reasoning": "The Acme Bank AI Governance Policy (ACME-POL-AIGOV-002, Section 5) requires a Pre-Deployment Risk Assessment that explicitly covers the system's intended purpose/use cases, known limitations, and fairness/bias considerations — which aligns partially with the Article 9(2)(b) obligation to estimate/evaluate risks arising from intended use. The Model Risk Management Standard (ACME-POL-MRM-003, Section 1) also indicates requirements to identify, assess, and manage model risk, supporting that risk estimation is within scope. However, the fragments do not explicitly require estimation and evaluation of risks under \"reasonably foreseeable misuse,\" nor do they explicitly state the need to quantify/estimate or evaluate those risks (they describe topics to cover but not the required risk-estimation/evaluation activity, methods, or coverage of foreseeable misuse). Missing specifics that would be needed to map fully to Article 9(2)(b): an explicit obligation to assess risks from reasonably foreseeable misuse, explicit language on estimation/evaluation (vs. listing topics), required methods/metrics or depth of assessment, and whether this assessment is lifecycle/ongoing or limited to pre-deployment. A human Compliance Analyst should review and confirm whether the existing Pre-Deployment Risk Assessment and Model Risk Management Standard are interpreted/implemented to include explicit estimation and evaluation of risks from intended use and reasonably foreseeable misuse.",
+  "citations": {
+    "external": "Article 9(2)(b)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "3. AI System Inventory",
+      "excerpt": "All AI systems must be registered in the Acme Bank AI System Inventory prior to\ndeployment, with the following minimum metadata: system name, business owner,\nintended purpose, data sources, and deployment date.",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.03109932318329811
+    }
+  ],
+  "confidence": 0.55,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:31:46.530383+00:00"
+}

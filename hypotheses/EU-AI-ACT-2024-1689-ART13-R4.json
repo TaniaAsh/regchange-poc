@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART13-R4",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved fragments partially cover aspects of the Article 13(2) requirement. ACME-POL-AIGOV-002 section 5 (Risk Assessment Prior to Deployment) requires documentation of intended purpose, use cases and known limitations prior to deployment, which maps to parts of the ‘‘complete and correct’’ content the regulator expects for ‘instructions for use’. ACME-POL-CCPD-001 section 3 (Product Disclosure Requirements) requires a product description, intended use and key risks, and ACME-POL-CCPD-001 section 2 (Plain Language Standard) requires customer-facing communications be in plain language — both of which support the ‘‘clear, relevant and comprehensible’’ aspects. However, none of the fragments explicitly say that deployer-facing “instructions for use” must be produced or that those instructions must be concise, accessible to deployers, or tested/verified for deployer comprehension. Missing specifics include: (a) an explicit obligation to produce deployer-targeted instructions for use; (b) requirements that instructions be concise, complete, correct and clear in the regulator’s terms; (c) accessibility/comprehensibility criteria or testing (e.g., user testing or sign-off by deployers); and (d) required format, distribution, ownership or review cadence for such instructions. Therefore these policies suggest a potential impact but leave gaps that a Compliance Analyst should investigate and remediate.",
+  "citations": {
+    "external": "Article 13(2)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03279569745063782
+    },
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "3. Product Disclosure Requirements",
+      "excerpt": "Product disclosure documents must include:\n\n- A description of the product and its intended use\n- Key risks associated with the product\n- Fees and charges\n- Contact details for customer support and complaints",
+      "relevance_score": 0.03226646035909653
+    },
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "2. Plain Language Standard",
+      "excerpt": "All customer-facing communications must be written in plain language, avoiding\nunnecessary jargon, and must be reviewed by the Customer Experience team prior to\npublication.",
+      "relevance_score": 0.0313725508749485
+    }
+  ],
+  "confidence": 0.7,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:32:53.607832+00:00"
+}

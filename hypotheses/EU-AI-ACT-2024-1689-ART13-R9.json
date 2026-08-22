@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART13-R9",
+  "classification": "potential_impact",
+  "reasoning": "The Acme Bank AI Governance Policy (ACME-POL-AIGOV-002 §5) requires a Pre-Deployment Risk Assessment that explicitly covers intended purpose/use cases and known limitations of the model. That indicates the organization assesses circumstances and limitations that could relate to risk. However, the fragments do not explicitly require that those known or foreseeable circumstances that may lead to risks to health, safety, or fundamental rights be included in the formal \"instructions for use\" for a high-risk AI system, nor do they reference the particular categories of risks (health, safety, fundamental rights) or the obligation to document foreseeable circumstances in end‑user instructions. The Customer Communications and Product Disclosure Policy (ACME-POL-CCPD-001 §4) mandates a general disclosure of automated processing and a route for human review, but does not require embedding risk‑related foreseeable circumstances into product instructions for use. Therefore the existing policies partially support the requirement (processes to identify risks exist) but are missing the explicit obligation to include those identified circumstances in the instructions for use and the specific content/format expectations the regulator requires. A human Compliance Analyst should review and confirm whether the risk assessment outputs are formally linked to product instructions and whether policy should be updated to mandate inclusion of health/safety/fundamental-rights-related foreseeable circumstances in instructions for use.",
+  "citations": {
+    "external": "Article 13(3)(b)(iii)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03333333507180214
+    },
+    {
+      "policy_document_id": "ACME-POL-CCPD-001",
+      "policy_title": "Acme Bank Customer Communications and Product Disclosure Policy",
+      "section": "4. Automated Decisioning Disclosures",
+      "excerpt": "Where a product decision (e.g. an application outcome) is materially influenced by\nan automated system, the customer-facing communication must include a general\nstatement that automated processing was used and provide a route to request human\nreview, in line with existing consumer protection commitments.",
+      "relevance_score": 0.0317540317773819
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.03067915514111519
+    }
+  ],
+  "confidence": 0.7,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:33:33.385511+00:00"
+}

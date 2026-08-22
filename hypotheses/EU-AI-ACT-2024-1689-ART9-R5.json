@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R5",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved policy (ACME-POL-MRM-003 §6) explicitly requires business units to monitor ongoing model performance and escalate material performance degradation, and §3 requires identification of known limitations at validation. These provisions indicate the bank has post-deployment monitoring and some awareness/identification of model limitations, which is relevant to the regulator's requirement to use post-market monitoring data. However, the fragments do not explicitly state that analysis of post-market monitoring data must be used to evaluate \"other risks possibly arising\" (e.g., operational, compliance, legal, reputational or systemic risks), nor do they describe a process, cadence, or required outputs for translating monitoring data into an evaluation of such other risks. They also lack explicit linkage of post-market monitoring analysis to the wider risk management system (e.g., documented risk evaluations, escalation paths for non-model risks, or required remedial actions). Therefore this is a partial match: the policy supports ongoing monitoring (potential impact) but is missing the explicit obligation and procedural detail to satisfy Article 9(2)(c). A human Compliance Analyst should confirm whether the broader MRM Standard or other policies cover the missing elements or whether policy updates are required.",
+  "citations": {
+    "external": "Article 9(2)(c)",
+    "internal": "ACME-POL-MRM-003, 6. Model Performance Monitoring"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "6. Model Performance Monitoring",
+      "excerpt": "Business units are responsible for monitoring the ongoing performance of models\nunder their ownership against the metrics agreed at validation, and escalating\nmaterial performance degradation to the Model Risk Function outside of the\nscheduled annual revalidation cycle.",
+      "relevance_score": 0.032786883413791656
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "3. Initial Validation",
+      "excerpt": "Prior to first use, every model must undergo independent validation by the Model\nRisk Function, covering:\n\n- Conceptual soundness of the model design\n- Data quality and representativeness of training/validation data\n- Outcome analysis and benchmark comparison\n- Identification of known limitations and boundary conditions",
+      "relevance_score": 0.03205128386616707
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.030621785670518875
+    }
+  ],
+  "confidence": 0.7,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:31:54.558022+00:00"
+}

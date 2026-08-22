@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R6",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved fragments show internal processes for assessing and governing model/AI risk which are relevant to Article 9(2)(d). ACME-POL-AIGOV-002 (section 5) requires a Pre-Deployment Risk Assessment covering intended purpose, data sources/quality, limitations, fairness/bias, and sign-off for high-impact systems. ACME-POL-MRM-003 (section 1) states the Standard sets out requirements for identifying, assessing, and managing model risk, and section 4 requires tiered sign-off (Model Risk Committee or Head of Model Risk). These items indicate that the organization conducts risk identification/assessment and has governance/sign-off controls, which is consistent with having elements of a risk management system designed to address identified risks.\n\nHowever, the fragments do not explicitly state that the bank must adopt \"appropriate and targeted risk management measures\" mapped to the risks identified (e.g., documented selection of specific mitigations for each identified risk, criteria for proportionality/targeting, implementation steps, monitoring of measure effectiveness, assignment of responsibility for implementing measures, or evidence that measures were enacted and maintained). The evidence is therefore a partial match: it supports that the bank performs assessments and governance approvals but does not show explicit adoption, mapping, or ongoing monitoring of targeted risk mitigation measures as required by Article 9(2)(d). A human Compliance Analyst should verify whether other policy sections (not provided) require (a) documented selection of targeted mitigations tied to identified risks, (b) implementation/operationalization of those measures, and (c) monitoring and review of mitigation effectiveness.",
+  "citations": {
+    "external": "Article 9(2)(d)",
+    "internal": "ACME-POL-AIGOV-002; ACME-POL-MRM-003, 5. Risk Assessment Prior to Deployment; 1. Purpose; 4. Model Risk Committee Approval"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.032786883413791656
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "4. Model Risk Committee Approval",
+      "excerpt": "Tier 1 models require sign-off from the Model Risk Committee before deployment.\nTier 2 and Tier 3 models require sign-off from the Head of Model Risk.",
+      "relevance_score": 0.032258063554763794
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.0313725508749485
+    }
+  ],
+  "confidence": 0.6,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:32:04.157189+00:00"
+}

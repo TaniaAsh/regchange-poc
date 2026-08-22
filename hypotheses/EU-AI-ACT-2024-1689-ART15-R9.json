@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART15-R9",
+  "classification": "no_impact_proposed",
+  "reasoning": "The retrieved fragments describe general AI governance and pre-deployment risk assessment topics (intended purpose, data quality, fairness/bias, approval by the AI Governance Committee) but contain no provisions about cybersecurity technical measures for high-risk AI systems. Article 15(5) specifically requires that technical solutions ensuring cybersecurity be appropriate to the circumstances and risks (e.g., threat modeling, vulnerability testing, access controls, encryption, secure deployment, incident response), and none of the fragments mention these cybersecurity controls or how technical solutions should be tailored to risk. Because the fragments do not address the specific obligation about cybersecurity technical solutions, they do not meaningfully satisfy or map to Article 15(5). A human Compliance Analyst should review and, if needed, supplement policy with explicit cybersecurity technical requirements for high-risk AI systems.",
+  "citations": {
+    "external": "Article 15(5)",
+    "internal": null
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03333333507180214
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "4. Governance Committee",
+      "excerpt": "The AI Governance Committee (AIGC) meets monthly and is the approval body for any\nAI system classified as \"high impact\" under the Acme Bank AI Risk Tiering\nFramework (see Section 5).",
+      "relevance_score": 0.0320020467042923
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "2. Scope",
+      "excerpt": "Applies to all AI systems used in production, including those developed in-house\nand those procured from third parties, across all business lines.",
+      "relevance_score": 0.03109932318329811
+    }
+  ],
+  "confidence": 0.9,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:52:22.464769+00:00"
+}

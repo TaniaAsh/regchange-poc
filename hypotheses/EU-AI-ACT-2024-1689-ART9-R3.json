@@ -1,0 +1,36 @@
+{
+  "requirement_id": "EU-AI-ACT-2024-1689-ART9-R3",
+  "classification": "potential_impact",
+  "reasoning": "The retrieved Acme fragments show elements of a risk-assessment program that map to the Article 9(2)(a) requirement but do not fully mirror it. ACME-POL-AIGOV-002 section 5 (Pre-Deployment Risk Assessment) requires a pre-deployment assessment covering intended purpose/use cases, data sources/quality, known limitations, and fairness/bias considerations, which supports identification of some risks (particularly bias/fundamental-rights related risks) and ties assessment to intended purpose. The Model Risk Management Standard (ACME-POL-MRM-003 section 1) also establishes requirements to identify, assess and manage model risk. Roles and responsibilities (ACME-POL-AIGOV-002 section 6) show governance and independent review, which supports an organizational capability to perform risk analysis.\n\nWhat is missing or unclear versus the regulatory text: (1) none of the fragments explicitly require identification and analysis of \"known and reasonably foreseeable risks\" phrased as such (the policy mentions \"known limitations\" but not \"reasonably foreseeable\" future risks); (2) the fragments do not explicitly require that risks to \"health, safety or fundamental rights\" be identified and analysed (fairness/bias is present, but health/safety and the full scope of fundamental rights are not named); (3) the policy appears focused on pre-deployment assessment and model-risk processes, so it is unclear whether ongoing identification/analysis during use (i.e., when the system is used in accordance with its intended purpose over time) is required; and (4) there is no explicit methodological or documentation requirement shown for how to perform the required \"analysis\" (depth, metrics, or required outputs/controls are not specified in the fragments).\n\nRecommendation: treat these fragments as indicating potential impact (the bank already has relevant processes), but a human Compliance Analyst should verify gaps and determine whether the policy must be amended to explicitly cover \"reasonably foreseeable\" risks, explicitly name health/safety/fundamental rights, require lifecycle/operational assessment, and define required analysis outputs and documentation.",
+  "citations": {
+    "external": "Article 9(2)(a)",
+    "internal": "ACME-POL-AIGOV-002, 5. Risk Assessment Prior to Deployment"
+  },
+  "retrieved_fragments": [
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "5. Risk Assessment Prior to Deployment",
+      "excerpt": "Before any AI system is deployed to production, the owning business unit must\ncomplete a Pre-Deployment Risk Assessment covering:\n\n- Intended purpose and use cases\n- Data sources and data quality\n- Known limitations of the model or system\n- Fairness and bias considerations\n- Sign-off from the AIGC for high-impact systems",
+      "relevance_score": 0.03306011110544205
+    },
+    {
+      "policy_document_id": "ACME-POL-AIGOV-002",
+      "policy_title": "Acme Bank AI Governance Policy",
+      "section": "6. Roles and Responsibilities",
+      "excerpt": "- **Chief AI Officer**: overall accountability for the AI governance framework\n- **AI Governance Committee**: approval authority for high-impact systems\n- **Business Unit Owner**: day-to-day operational accountability for each system\n- **Model Risk Function**: independent review of model risk (see the separate\n  Model Risk Management Standard)",
+      "relevance_score": 0.032522473484277725
+    },
+    {
+      "policy_document_id": "ACME-POL-MRM-003",
+      "policy_title": "Acme Bank Model Risk Management Standard",
+      "section": "1. Purpose",
+      "excerpt": "This Standard sets out the requirements for identifying, assessing, and managing\nmodel risk across all quantitative models used by Acme Bank, including statistical,\nmachine learning, and AI-based models.",
+      "relevance_score": 0.030621785670518875
+    }
+  ],
+  "confidence": 0.7,
+  "model_version": "gpt-5-mini",
+  "requires_human_confirmation": true,
+  "timestamp": "2026-08-22T07:31:38.654030+00:00"
+}
