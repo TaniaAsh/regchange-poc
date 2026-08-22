@@ -1,4 +1,4 @@
-# Regulatory Change Impact Analysis — PoC
+# Regulatory Change Impact Analysis. PoC
 
 A minimal, low-cost proof of concept for the deterministic-workflow-with-bounded-AI
 architecture described in `docs/ARCHITECTURE.md`.
